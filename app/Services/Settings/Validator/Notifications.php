@@ -22,6 +22,7 @@ class Notifications extends Validate
                 'sendTo.routing' => 'required_if:sendTo.type,routing',
                 'subject'        => 'required',
                 'message'        => 'required',
+                'name'           => 'required',
             ],
             [
                 'sendTo.type.required'     => 'The Send To field is required.',

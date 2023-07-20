@@ -112,8 +112,13 @@
 
                     <template v-if="selected">
                         <!--Notification name-->
-                        <el-form-item class="ff-form-item" :label="$t('Name')">
+                        <el-form-item
+                            class="ff-form-item is-required"
+                            :class="errors.has('name') ? 'is-error' : ''"
+                            :label="$t('Name')"
+                        >
                             <el-input v-model="selected.value.name"></el-input>
+                            <error-view field="name" :errors="errors"></error-view>
                         </el-form-item>
 
                         <!--send to-->
@@ -850,7 +855,8 @@ export default {
                     this.selectedIndex = null;
                 })
                 .catch(errors => {
-                    this.errors.record(errors);
+                    this.errors.record(errors?.responseJSON || {});
+	                this.$fail(this.$t('Please check required fields.'));
                     this.selected.id = id;
                 })
                 .always(() => {

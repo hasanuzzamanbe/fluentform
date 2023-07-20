@@ -846,6 +846,7 @@ class TranslationString
             'Layout Type' => __('Layout Type', 'fluentform'),
             'Upgrade to Pro' => __('Upgrade to Pro', 'fluentform'),
             'Admin Top Navigation' => __('Admin Top Navigation', 'fluentform'),
+            'Please check required fields.' => __('Please check required fields.', 'fluentform'),
             'Toggle Admin Top Navigation on or off and Save the Settings. Please reload the page after changing this option.' => __('Toggle Admin Top Navigation on or off and Save the Settings. Please reload the page after changing this option.', 'fluentform'),
         );
 
