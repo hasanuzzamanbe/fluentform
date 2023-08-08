@@ -1800,6 +1800,56 @@ label.el-radio, label.el-checkbox {
   }
 }
 
+// ff global search
+.global-search-wrapper {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 20px;
+  .global-search-body {
+    position: relative;
+    min-height: 200px;
+    background: white;
+    width: 700px;
+    border-radius: 5px;
+    padding: 20px;
+    max-height: 400px;
+    overflow: auto;
+    input {
+      width: 100%;
+      padding: 3px 10px;
+      font-size: 16px;
+    }
+    ul li {
+      padding: 10px;
+      margin-top: 7px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #606266;
+      display: block;
+      border-radius: 6px;
+      transition: 0.2s;
+      &:focus {
+        background-color: #4B4C4D;
+        color: #ffffff;
+        outline: 0;
+      }
+    }
+    span.global-search-not-match {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 16px;
+    }
+  }
+}
+
+
 .scroll {
 	position: relative;
 	animation: down 2s ease-in-out infinite;

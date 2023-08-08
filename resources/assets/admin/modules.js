@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import AddOnModules from './views/AddonModules';
 import notifier from './notifier';
+import globalSearch from './global_search';
 
 import {
     Button,
@@ -43,6 +44,7 @@ Vue.mixin({
 var app = new Vue({
     el: '#ff_add_ons_app',
     components: {
+        globalSearch,
         'fluent-add-ons': AddOnModules
     }
 });

@@ -55,6 +55,7 @@ import ImportForms from './ImportForms';
 import ActivityLogs from './ActivityLogs';
 import ApiLogs from './ApiLogs';
 import Migrator from './Migrator';
+import globalSearch from '../global_search';
 
 Vue.mixin({
     methods:{
@@ -71,6 +72,7 @@ Vue.mixin({
 new Vue({
     el: '#ff_transfer_app',
     components: {
+        globalSearch,
         exportforms: ExportForms,
         importforms: ImportForms,
         activitylogs: ActivityLogs,

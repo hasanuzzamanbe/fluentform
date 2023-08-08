@@ -162,6 +162,14 @@ class Menu
         );
 
         wp_register_script(
+            'fluentform-docs',
+            fluentFormMix('js/docs.js'),
+            ['jquery'],
+            FLUENTFORM_VERSION,
+            true
+        );
+
+        wp_register_script(
             'fluentform_form_entries',
             fluentFormMix('js/form_entries.js'),
             ['jquery', 'fluentform_chart_js', 'fluentform_vue_chart_js'],

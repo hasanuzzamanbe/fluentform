@@ -44,6 +44,7 @@ import {
 import lang from 'element-ui/lib/locale/lang/en';
 import locale from 'element-ui/lib/locale';
 import mixins from './editor_mixins';
+import globalSearch from './global_search'
 // Global error handling...
 import Errors from '../common/Errors';
 import FormEditor from './views/FormEditor.vue';
@@ -101,6 +102,7 @@ new Vue({
     el: "#ff_form_editor_app",
     store,
     components: {
+        globalSearch,
         ff_form_editor: FormEditor
     },
     data: {
