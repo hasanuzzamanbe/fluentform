@@ -236,7 +236,7 @@
                     >
 
                         <el-table-column type="selection" width="30"></el-table-column>
-                        <el-table-column label="#" sortable="custom" prop="id" width="100px">
+                        <el-table-column label="#" sortable="custom" prop="id" width="100px" :class-name="idShortByClassName">
                             <template slot-scope="scope">
                                 <div class="has_hover_item">
                                     <router-link :to="{
@@ -511,6 +511,7 @@
                 entrySelections: [],
                 columns: [],
                 bulkAction: '',
+	            idShortByClassName: '',
                 paginate: {
                     total: 0,
                     current_page: parseInt(this.$route.query.page) || 1,
@@ -730,6 +731,7 @@
                         this.entries = response.data;
                         this.setPaginate(response);
                         this.resetUrlParams();
+	                    this.idShortByClassName = this.sort_by === 'ASC' ? 'ascending' : 'descending';
                     })
                     .catch((error) => {
 
@@ -751,10 +753,12 @@
 		                    b = b.user_inputs[field] || "";
 		                    return this.getSortOrder(a, b, column.order);
 	                    });
+						this.idShortByClassName = '';
                     } else if (column.prop === 'payment_total') {
 	                    this.entries.sort((a, b) => {
 		                    return this.getSortOrder(a.payment_total, b.payment_total, column.order);
 	                    });
+	                    this.idShortByClassName = '';
                     }
                 }
             },
