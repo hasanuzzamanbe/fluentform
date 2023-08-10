@@ -30,12 +30,6 @@ class GlobalSearchService
                 "tags"  => ['all', 'entries']
             ],
             [
-                "title" => 'Payments',
-                "icon"  => '',
-                "path"  => '?page=fluent_forms_payment_entries',
-                "tags"  => ['all', 'payments', 'entries']
-            ],
-            [
                 "title" => 'Support',
                 "icon"  => '',
                 "path"  => '?page=fluent_forms_docs',
@@ -91,24 +85,6 @@ class GlobalSearchService
                 "icon"  => '',
                 "path"  => '?page=fluent_forms_settings#double_optin_settings',
                 "tags"  => ['global', 'security', 'double opt-in', 'optin']
-            ],
-            [
-                "title" => 'Global Settings > Payment > Settings',
-                "icon"  => '',
-                "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/',
-                "tags"  => ['global', 'settings', 'payment']
-            ],
-            [
-                "title" => 'Global Settings > Payment > Coupons',
-                "icon"  => '',
-                "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/coupons',
-                "tags"  => ['global', 'settings', 'payment', 'coupons']
-            ],
-            [
-                "title" => 'Global Settings > Payment > Payment Methods',
-                "icon"  => '',
-                "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/payment_methods',
-                "tags"  => ['global', 'settings', 'payment', 'method', 'stripe']
             ],
             [
                 "title" => 'Global Settings > License',
@@ -358,6 +334,35 @@ class GlobalSearchService
             ],
         ];
 
+        if (defined('FLUENTFORMPRO')) {
+            $links = array_merge($links, [
+                [
+                    "title" => 'Payments',
+                    "icon"  => '',
+                    "path"  => '?page=fluent_forms_payment_entries',
+                    "tags"  => ['all', 'payments', 'entries']
+                ],
+                [
+                    "title" => 'Global Settings > Payment > Settings',
+                    "icon"  => '',
+                    "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/',
+                    "tags"  => ['global', 'settings', 'payment']
+                ],
+                [
+                    "title" => 'Global Settings > Payment > Coupons',
+                    "icon"  => '',
+                    "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/coupons',
+                    "tags"  => ['global', 'settings', 'payment', 'coupons']
+                ],
+                [
+                    "title" => 'Global Settings > Payment > Payment Methods',
+                    "icon"  => '',
+                    "path"  => '?page=fluent_forms_settings&component=payment_settings%2F#/payment_methods',
+                    "tags"  => ['global', 'settings', 'payment', 'method', 'stripe']
+                ],
+            ]);
+        }
+
         $forms = Form::where('status', 'published')
             ->select(['id', 'title', 'type'])->get();
         if ($forms) {
@@ -446,6 +451,13 @@ class GlobalSearchService
                         "icon"  => '',
                         "path"  => "?page=fluent_forms&form_id=$form->id&route=settings&sub_route=form_settings#/all-integrations",
                         "tags"  => ['configure integrations', "$form->id", $form->title]
+                    ],
+                    [
+                        "title" => "Forms > $form->title > Preview",
+                        "icon"  => '',
+                        "type"  => 'preview',
+                        "path"  => "?fluent_forms_pages=1&design_mode=1&preview_id=$form->id#ff_preview",
+                        "tags"  => ['preview ', "$form->id", $form->title]
                     ]
                 ];
                 if ('post' === $form->type) {
@@ -463,13 +475,21 @@ class GlobalSearchService
                         "path"  => "?page=fluent_forms&form_id=$form->id&route=conversational_design",
                         "tags"  => ['conversational design', "$form->id", $form->title]
                     ];
+                    $formSpecificLinks[] = [
+                        "title" => "Forms > $form->title > Conversational Preview",
+                        "icon"  => '',
+                        "type"  => 'preview',
+                        "path"  => "?fluent-form=$form->id",
+                        "tags"  => ['preview', 'conversational', "$form->id", $form->title]
+                    ];
                 }
                 $links = array_merge($links, $formSpecificLinks);
             }
         }
         return [
             "links" => apply_filters('fluentform/global_search_links', $links),
-            "admin_url" => get_admin_url(null, 'admin.php')
+            "admin_url" => get_admin_url(null, 'admin.php'),
+            "site_url" => site_url(),
         ];
     }
 }

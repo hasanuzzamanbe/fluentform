@@ -56,6 +56,7 @@ export default {
 			links: [],
 			filteredLinks: [],
 			adminUrl: '',
+			siteUrl: '',
 			linkFocusIndex: 0,
 			loading: true,
 		}
@@ -66,6 +67,7 @@ export default {
 			FluentFormsGlobal.$rest.get(url)
 				.then((response) => {
 					this.adminUrl = response.admin_url;
+					this.siteUrl = response.site_url;
 					this.links = response.links;
 					this.filteredLinks = this.links.slice(0, 7);
 				})
@@ -90,7 +92,13 @@ export default {
 		},
 		goToSlug($event, link) {
 			const oldUrl = new URL(window.location);
-			window.location.href = this.adminUrl + link.path;
+			if (link.type && link.type === 'preview') {
+				window.location.href = this.siteUrl + '/' + link.path;
+				return;
+			} else {
+				window.location.href = this.adminUrl + link.path;
+			}
+
 			if (this.shouldReload(link, oldUrl)) {
 				window.location.reload();
 			}
