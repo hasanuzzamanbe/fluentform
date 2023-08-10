@@ -434,6 +434,20 @@ a.lead-text{
         height: 100%;
       }
     }
+  .global-search-menu-button {
+    background-color: #E8F2FF;
+    color: #1A7EFB;
+    padding: 0 5px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 6px;
+    line-height: 1.6;
+    transition: 0.2s;
+    margin: 0 0 0 auto;
+    border: 0;
+    cursor: pointer;
+  }
 }
 // ff_row
 .ff_row{

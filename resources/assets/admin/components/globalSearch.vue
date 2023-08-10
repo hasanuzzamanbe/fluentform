@@ -1,6 +1,6 @@
 <template>
-    <div v-if="showSearch" class="global-search-wrapper">
-        <div class="global-search-container " v-loading="loading">
+    <div v-if="showSearch" class="global-search-wrapper" @click="reset">
+        <div class="global-search-container " v-loading="loading" @click.stop="">
             <div class="global-search-body ">
                 <div class="el-input el-input--prefix">
                     <input ref="searchInput"
@@ -13,16 +13,21 @@
                     <span class="el-input__prefix"><i class="el-input__icon el-icon-search"></i></span>
                 </div>
 
-                <ul class="search-result" v-if="this.filteredLinks.length">
-                    <li
-                            ref="links" v-for="(link, i) in filteredLinks"
-                            :key="'link_' + i"
-                            tabindex='1'
-                            @keyup.enter="goToSlug($event, link)"
-                            @click="goToSlug($event, link)"
-                    >
-                        <span>{{ link.title }}</span>
-                    </li>
+                <ul class="search-result">
+	                <template v-if="this.filteredLinks.length">
+		                <li
+			                ref="links" v-for="(link, i) in filteredLinks"
+			                :key="'link_' + i"
+			                tabindex='1'
+			                @keyup.enter="goToSlug($event, link)"
+			                @click="goToSlug($event, link)"
+		                >
+			                <span>{{ link.title }}</span>
+		                </li>
+	                </template>
+	                <li v-else>
+		                <span>Search not match. Try different.</span>
+	                </li>
                 </ul>
             </div>
             <div>
@@ -33,6 +38,7 @@
                         <i class="el-icon-bottom"></i>
                         <i class="el-icon-top"></i>
                     </li>
+                    <li>Tab to focus search</li>
                     <li>Enter to Select</li>
                 </ul>
             </div>
@@ -122,6 +128,7 @@ export default {
 		},
 		listener(e) {
 			if (e.ctrlKey || e.metaKey && e.keyCode === 75) {
+				e.preventDefault && e.preventDefault();
 				if (!this.showSearch) {
 					this.showSearch = true;
 				} else {
@@ -136,6 +143,7 @@ export default {
 				}
 			} else if (e.keyCode === 27) {
 				// close on ESC button press
+				e.preventDefault()
 				this.reset()
 			} else if (e.keyCode === 38 || e.keyCode === 40) {
 				e.preventDefault();
@@ -170,6 +178,9 @@ export default {
 	},
 	created() {
 		document.addEventListener('keydown', this.listener);
+		document.addEventListener('global-search-menu-button-click',  (e) => {
+			this.listener({ctrlKey: true, metaKey : true, keyCode: 75})
+		})
 	},
 	beforeDestroy() {
 		document.removeEventListener('keydown', this.listener);

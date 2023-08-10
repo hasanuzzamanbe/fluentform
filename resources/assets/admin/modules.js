@@ -13,7 +13,8 @@ import {
     Radio,
     RadioGroup,
     Row,
-    Col
+    Col,
+    Loading
 } from 'element-ui';
 
 Vue.use(RadioButton);
@@ -25,6 +26,7 @@ Vue.use(Input);
 Vue.use(Switch);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Loading);
 
 Vue.prototype.$notify = Notification;
 
