@@ -1812,21 +1812,19 @@ label.el-radio, label.el-checkbox {
   min-height: 100vh;
   height: auto;
   padding: 20px;
-  .global-search-body {
+  .global-search-container {
     position: relative;
-    min-height: 200px;
-    background: white;
+    background: #f6f6f7;
     width: 700px;
     border-radius: 5px;
-    padding: 20px;
-    max-height: 400px;
     overflow: auto;
     input {
       width: 100%;
-      padding: 3px 10px;
-      font-size: 16px;
+      padding: 3px 35px;
+      font-size: 17px;
     }
-    ul li {
+    ul.search-result li {
+      background: #ffffff;
       padding: 10px;
       margin-top: 7px;
       cursor: pointer;
@@ -1835,8 +1833,9 @@ label.el-radio, label.el-checkbox {
       display: block;
       border-radius: 6px;
       transition: 0.2s;
+      box-shadow: 0 1px 3px 0 #d4d9e1;
       &:focus {
-        background-color: #4B4C4D;
+        background-color: #197efb;
         color: #ffffff;
         outline: 0;
       }
@@ -1845,6 +1844,26 @@ label.el-radio, label.el-checkbox {
       display: inline-block;
       margin-top: 6px;
       font-size: 16px;
+    }
+  }
+  .global-search-body{
+    padding: 20px;
+    max-height: 400px;
+    min-height: 200px;
+    overflow-y: auto;
+
+  }
+  .search-commands{
+    display: flex;
+    justify-content: space-around;
+    background: #ffffff;
+    padding: 12px;
+    box-shadow: 0 -1px 0 0 #efefef,0 -2px 6px 0 rgba(70,90,150,.10);
+
+    ul li{
+      padding: 10px;
+      margin-top: 7px;
+      font-size: 12px;
     }
   }
 }

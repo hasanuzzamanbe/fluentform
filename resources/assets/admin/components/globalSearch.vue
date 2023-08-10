@@ -1,25 +1,42 @@
 <template>
-	<div v-if="showSearch" class="global-search-wrapper">
-		<div class="global-search-body" v-loading="loading">
-			<input ref="searchInput"
-			       @input="search($event.target.value)"
-			       type="text" name="search"
-			       :placeholder="placeholder"
-			       autocomplete="off"
-			/>
-			<ul v-if="this.filteredLinks.length">
-				<li
-					ref="links" v-for="(link, i) in filteredLinks"
-					:key="'link_' + i"
-					tabindex='1'
-					@keyup.enter="goToSlug($event, link)"
-					@click="goToSlug($event, link)"
-				>
-					<span >{{ link.title }}</span>
-				</li>
-			</ul>
-			<span v-else class="global-search-not-match">Match not found, try different.</span>
-		</div>
+    <div v-if="showSearch" class="global-search-wrapper">
+        <div class="global-search-container " v-loading="loading">
+            <div class="global-search-body ">
+                <div class="el-input el-input--prefix">
+                    <input ref="searchInput"
+                           prefix-icon="el-icon-search"
+                           @input="search($event.target.value)"
+                           type="text" name="search"
+                           :placeholder="placeholder"
+                           autocomplete="off"
+                    />
+                    <span class="el-input__prefix"><i class="el-input__icon el-icon-search"></i></span>
+                </div>
+
+                <ul class="search-result" v-if="this.filteredLinks.length">
+                    <li
+                            ref="links" v-for="(link, i) in filteredLinks"
+                            :key="'link_' + i"
+                            tabindex='1'
+                            @keyup.enter="goToSlug($event, link)"
+                            @click="goToSlug($event, link)"
+                    >
+                        <span>{{ link.title }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="search-commands">
+                    <li>Esc to close</li>
+                    <li>
+                        Navigate
+                        <i class="el-icon-bottom"></i>
+                        <i class="el-icon-top"></i>
+                    </li>
+                    <li>Enter to Select</li>
+                </ul>
+            </div>
+        </div>
 	</div>
 </template>
 
