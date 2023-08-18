@@ -4,6 +4,25 @@
  * @var $router \FluentForm\Framework\Http\Router
  */
 
+
+
+$router->post('block-preview',function (FluentForm\Framework\Request\Request $request) {
+    $data = [
+        'id'                 => '',
+        'title'              => null,
+        'css_classes'        => '',
+        'permission'         => '',
+        'type'               => 'classic',
+        'permission_message' => __('Sorry, You do not have permission to view this form', 'fluentform')
+    ];
+    $atts = [
+        'id' => $request->get('form_id')
+    ];
+    
+    $atts = wp_parse_args( $atts,$data);
+    $html = (new \FluentForm\App\Modules\Component\Component(wpFluentForm()))->renderForm($atts);
+    wp_send_json($html);
+});
 /*
 * Forms resource
 */
@@ -147,4 +166,5 @@ $router->prefix('report')->withPolicy('ReportPolicy')->group(function ($router) 
 * Review Query
 */
 $router->post('notice', 'AdminNoticeController@noticeActions')->withPolicy('FormPolicy');
+
 

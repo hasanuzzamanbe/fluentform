@@ -154,13 +154,15 @@ add_action('admin_init', function () {
 });
 
 add_action('enqueue_block_editor_assets', function () {
+   
     wp_enqueue_script(
         'fluentform-gutenberg-block',
         fluentFormMix('js/fluent_gutenblock.js'),
         ['wp-element', 'wp-polyfill', 'wp-i18n', 'wp-blocks', 'wp-components'],
         FLUENTFORM_VERSION
     );
-
+   
+    
     $forms = wpFluent()->table('fluentform_forms')
         ->select(['id', 'title'])
         ->orderBy('id', 'DESC')
@@ -174,12 +176,34 @@ add_action('enqueue_block_editor_assets', function () {
     wp_localize_script('fluentform-gutenberg-block', 'fluentform_block_vars', [
         'logo'  => fluentFormMix('img/fluent_icon.png'),
         'forms' => $forms,
+        'rest' =>  Helper::getRestInfo()
     ]);
 
     wp_enqueue_style(
         'fluentform-gutenberg-block',
         fluentFormMix('css/fluent_gutenblock.css'),
         ['wp-edit-blocks']
+    );
+    $fluentFormPublicCss = fluentFormMix('css/fluent-forms-public.css');
+    $fluentFormPublicDefaultCss = fluentFormMix('css/fluentform-public-default.css');
+    
+    if (is_rtl()) {
+        $fluentFormPublicCss = fluentFormMix('css/fluent-forms-public-rtl.css');
+        $fluentFormPublicDefaultCss = fluentFormMix('css/fluentform-public-default-rtl.css');
+    }
+    
+    wp_enqueue_style(
+        'fluent-form-styles',
+        $fluentFormPublicCss,
+        [],
+        FLUENTFORM_VERSION
+    );
+    
+    wp_enqueue_style(
+        'fluentform-public-default',
+        $fluentFormPublicDefaultCss,
+        [],
+        FLUENTFORM_VERSION
     );
 });
 
@@ -902,7 +926,6 @@ if (function_exists('register_block_type')) {
                 }
             }
             $type = \FluentForm\App\Helpers\Helper::isConversionForm($atts['formId']) ? 'conversational' : '';
-
             return do_shortcode('[fluentform css_classes="' . $className . ' ff_guten_block" id="' . $atts['formId'] . '"  type="' . $type . '"]');
         },
         'attributes'      => [
@@ -910,6 +933,9 @@ if (function_exists('register_block_type')) {
                 'type' => 'string',
             ],
             'className' => [
+                'type' => 'string',
+            ],
+            'blockId' => [
                 'type' => 'string',
             ],
         ],

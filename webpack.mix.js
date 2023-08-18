@@ -142,5 +142,7 @@ mix.then(() => {
 mix
     .copyDirectory('resources/assets/libs', 'assets/libs')
     .copyDirectory('resources/img', 'assets/img')
-    .copyDirectory('guten_block/public', 'assets/js')
+    // .copyDirectory('guten_block/public', 'assets/js')
     .copy('index.php', 'assets/index.php');
+
+mix.js('resources/assets/admin/fluent_gutenblock.js','assets/js/fluent_gutenblock.js').react()

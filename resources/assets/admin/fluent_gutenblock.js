@@ -33,10 +33,15 @@ registerBlockType('fluentfom/guten-block', {
         },
         className: {
             type: 'string'
+        },
+        blockId: {
+            type: 'string'
         }
     },
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,clientId}) {
         const config = window.fluentform_block_vars;
+        const cssClass = `ff-preview-${attributes.blockId}`; // Create the CSS class
+
         return (
             <div className="flueform-guten-wrapper">
                 <div className="fluentform-logo">
@@ -50,12 +55,50 @@ registerBlockType('fluentfom/guten-block', {
                         value: form.id,
                         label: form.title
                     }))}
-                    onChange={formId => setAttributes({formId})}
+                    onChange={formId => {
+                        setAttributes({formId})
+                        setAttributes({blockId:clientId})
+                        renderForm(formId,clientId)
+                    }}
                 />
+                <div className={cssClass}></div>
             </div>
         )
     },
     save({attributes}) {
+
+        if(attributes){
+            console.log(attributes)
+
+            renderForm(attributes.formId, attributes.blockId)
+        }
         return null;
     },
 });
+
+function renderForm(formId,blockId){
+
+    console.log(formId,blockId)
+    if (!formId){
+        return '';
+    }
+    const data = {
+        'form_id': formId,
+    };
+    const cssClass = `.ff-preview-${blockId}`; // Create the CSS class
+
+    const xhr = new XMLHttpRequest();
+    const url = window.fluentform_block_vars.rest.url + '/block-preview';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            // Select a specific child div with the class 'childDiv' using querySelector
+            const contentContainer = document.querySelector(cssClass);
+
+            contentContainer.innerHTML = response;
+        }
+    };
+    xhr.send(JSON.stringify(data));
+}

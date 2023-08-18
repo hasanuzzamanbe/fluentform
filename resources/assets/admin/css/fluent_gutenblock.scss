@@ -1,6 +1,6 @@
 .flueform-guten-wrapper {
   background: rgba(139, 139, 150, 0.1);
-  text-align: center;
+  //text-align: center;
   padding: 20px;
   .fluentform-logo {
     margin-bottom: 30px;
@@ -10,5 +10,8 @@
   }
  .components-base-control__label {
    padding-right: 15px;
+  }
+  .ff-btn-submit{
+    pointer-events:none;
   }
 }
