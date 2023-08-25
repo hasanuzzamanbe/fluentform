@@ -203,6 +203,7 @@ new Vue({
 
             this.form.id = form.id;
             this.form.title = form.title;
+            this.form.status = form.status;
             this.form.dropzone = formData.fields || [];
             let button = formData.submitButton || JSON.parse(JSON.stringify(this.submitButtonMock));
 
@@ -259,12 +260,12 @@ new Vue({
             if (!_ff.isEmpty(this.form.stepsWrapper)) {
                 formFields.stepsWrapper = this.form.stepsWrapper;
             }
-
             let data = {
                 title: this.form.title,
                 formFields: JSON.stringify(formFields),
                 form_id: this.form_id,
-                action: 'fluentform-form-update'
+                action: 'fluentform-form-update',
+                status :this.form.status,
             };
 
             FluentFormsGlobal.$post(data)

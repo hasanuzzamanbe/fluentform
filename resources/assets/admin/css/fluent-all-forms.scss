@@ -114,6 +114,11 @@ small {
     }
 }
 
-.ff_all_forms .inactive_form {
-    opacity: .6;
+.ff_all_forms {
+    .inactive_form {
+        opacity: .6;
+    }
+    .el-loading-spinner{
+        margin-top: -10px;
+    }
 }

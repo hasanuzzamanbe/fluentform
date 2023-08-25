@@ -155,7 +155,8 @@
                                                 class="el-switch--small"
                                                 :active-text="$t(scope.row.status === 'published' ? 'Active' : 'Inactive')"
                                                 @change="toggleStatus(scope.row.id, scope.row.title, scope.row.status)"
-
+                                                v-loading="changing_status"
+                                                element-loading-spinner="el-icon-loading"
                                                 active-value="published"
                                                 inactive-value="unpublished"
                                                 v-model="scope.row.status"
@@ -384,12 +385,13 @@ export default {
             sort_by: 'DESC',
             formLocations: {},
             loadingLocations: false,
-            radioOption: 'all'
+            radioOption: 'all',
+            changing_status: false,
         }
     },
     methods: {
         toggleStatus(id, title, status) {
-            this.loading = true;
+            this.changing_status = true;
 
             let data = {
                 title,
@@ -406,7 +408,7 @@ export default {
                     this.$fail(error.message);
                 })
                 .finally(() => {
-                    this.loading = false;
+                    this.changing_status = false;
                 });
         },
         goToPage(val) {

@@ -15,7 +15,7 @@ class Updater
     {
         $formId = Arr::get($attributes, 'form_id');
         $formFields = Arr::get($attributes, 'formFields');
-        $status = Arr::get($attributes, 'status', 'published');
+        $status = sanitize_text_field(Arr::get($attributes, 'status', 'published'));
         $title = sanitize_text_field(Arr::get($attributes, 'title'));
 
         $this->validate([
