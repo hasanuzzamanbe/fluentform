@@ -8,9 +8,12 @@ use FluentForm\App\Models\FormMeta;
 use FluentForm\App\Models\Submission;
 use FluentForm\App\Models\SubmissionMeta;
 use FluentForm\Framework\Helpers\ArrayHelper;
+use FluentForm\App\Helpers\Traits\GlobalDefaultMessages;
 
 class Helper
 {
+    use GlobalDefaultMessages;
+
     public static $tabIndex = 0;
 
     public static $formInstance = 0;
@@ -376,8 +379,9 @@ class Helper
                     ->where('field_value', $inputValue)
                     ->exists();
                 if ($exist) {
+                    $typeName = ArrayHelper::get($field, 'element', 'input_text');
                     return [
-                        'unique' => ArrayHelper::get($field, 'raw.settings.unique_validation_message'),
+                        'unique' => apply_filters('fluentform/validation_message_unique_'. $typeName, ArrayHelper::get($field, 'raw.settings.unique_validation_message'), $field),
                     ];
                 }
             }
@@ -793,7 +797,25 @@ class Helper
         return $title;
     }
 
-    public static function isAutoloadCaptchaEnabled() {
+    public static function isAutoloadCaptchaEnabled()
+    {
         return ArrayHelper::get(get_option('_fluentform_global_form_settings'), 'misc.autoload_captcha');
+    }
+
+    public static function resolveValidationRulesGlobalOption(&$field)
+    {
+        if (isset($field['fields']) && is_array($field['fields'])) {
+            foreach ($field['fields'] as &$subField) {
+                static::resolveValidationRulesGlobalOption($subField);
+            }
+        } else {
+            if ($rules = ArrayHelper::get($field, 'settings.validation_rules', [])) {
+                foreach ($rules as $key => $rule) {
+                    if(!isset($rule['global'])) {
+                        $field['settings']['validation_rules'][$key]['global'] = false;
+                    }
+                }
+            }
+        }
     }
 }
