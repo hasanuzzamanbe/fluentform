@@ -29,6 +29,13 @@ add_filter('fluentform/get_global_settings_values', function ($values, $key) {
         if (in_array('_fluentform_turnstile_details', $key)) {
             $values = FluentForm\App\Modules\Turnstile\Turnstile::ensureSettings($values);
         }
+
+        if (in_array('_fluentform_global_default_message_setting_fields', $key)) {
+            $values['_fluentform_global_default_message_setting_fields'] = \FluentForm\App\Helpers\Helper::globalDefaultMessageSettingFields();
+        }
+        if (in_array('_fluentform_global_form_settings', $key) && !isset($values['_fluentform_global_form_settings']['default_messages'])) {
+            $values['_fluentform_global_form_settings']['default_messages'] = \FluentForm\App\Helpers\Helper::getAllGlobalDefaultMessages();
+        }
     }
 
     return $values;

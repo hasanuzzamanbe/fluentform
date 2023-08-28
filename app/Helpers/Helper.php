@@ -8,9 +8,12 @@ use FluentForm\App\Models\FormMeta;
 use FluentForm\App\Models\Submission;
 use FluentForm\App\Models\SubmissionMeta;
 use FluentForm\Framework\Helpers\ArrayHelper;
+use FluentForm\App\Helpers\Traits\GlobalDefaultMessages;
 
 class Helper
 {
+    use GlobalDefaultMessages;
+
     public static $tabIndex = 0;
 
     public static $formInstance = 0;
@@ -793,7 +796,8 @@ class Helper
         return $title;
     }
 
-    public static function isAutoloadCaptchaEnabled() {
+    public static function isAutoloadCaptchaEnabled()
+    {
         return ArrayHelper::get(get_option('_fluentform_global_form_settings'), 'misc.autoload_captcha');
     }
 }

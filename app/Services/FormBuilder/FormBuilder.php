@@ -431,17 +431,17 @@ class FormBuilder
                     );
                     $rules[$ruleName]['message'] = apply_filters('fluentform/validation_message_' . $ruleName, $rule['message'], $item);
 
-                    apply_filters_deprecated(
+                    $rules[$ruleName]['message'] = apply_filters_deprecated(
                         'fluentform_validation_message_' . $item['element'] . '_' . $ruleName,
                         [
-                            $rule['message'],
+                            $rules[$ruleName]['message'],
                             $item
                         ],
                         FLUENTFORM_FRAMEWORK_UPGRADE,
                         'fluentform/validation_message_' . $item['element'] . '_' . $ruleName,
                         'Use fluentform/validation_message_' . $item['element'] . '_' . $ruleName . ' instead of fluentform_validation_message_' . $item['element'] . '_' . $ruleName
                     );
-                    $rules[$ruleName]['message'] = apply_filters('fluentform/validation_message_' . $item['element'] . '_' . $ruleName, $rule['message'], $item);
+                    $rules[$ruleName]['message'] = apply_filters('fluentform/validation_message_' . $item['element'] . '_' . $ruleName, $rules[$ruleName]['message'], $item);
                 }
             }
     

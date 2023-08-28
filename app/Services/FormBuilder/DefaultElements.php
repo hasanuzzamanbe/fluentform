@@ -1,5 +1,5 @@
 <?php
-
+$defaultGlobalMessages = \FluentForm\App\Helpers\Helper::getAllGlobalDefaultMessages();
 $defaultElements = [
     'general' => [
         'input_name' => [
@@ -16,21 +16,6 @@ $defaultElements = [
                 'label_placement'    => 'top',
             ],
             'fields' => [
-                //                'title' => array(
-                //                    'attributes' => array(
-                //                    ),
-                //                    'settings' => array(
-                //                        'disabled' => false,
-                //                        'container_class' => '',
-                //                        'label' => __('Title', 'fluentform'),
-                //                        'visible' => false,
-                //                        'validation_rules' => array(),
-                //                        'calc_value_status' => false,
-                //                    ),
-                //                    'editor_options' => array(
-                //                        'template' => 'inputText'
-                //                    ),
-                //                ),
                 'first_name' => [
                     'element'    => 'input_text',
                     'attributes' => [
@@ -50,7 +35,7 @@ $defaultElements = [
                         'validation_rules' => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -80,7 +65,7 @@ $defaultElements = [
                         'validation_rules' => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -110,7 +95,7 @@ $defaultElements = [
                         'validation_rules' => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -149,11 +134,11 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                     'email' => [
                         'value'   => true,
-                        'message' => __('This field must contain a valid email', 'fluentform'),
+                        'message' => $defaultGlobalMessages['email'],
                     ],
                 ],
                 'conditional_logics'        => [],
@@ -188,7 +173,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics'        => [],
@@ -226,7 +211,7 @@ $defaultElements = [
                 'validation_rules'        => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -259,7 +244,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -313,7 +298,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -341,7 +326,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -370,7 +355,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -399,7 +384,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -429,7 +414,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'conditional_logics' => [],
@@ -458,7 +443,7 @@ $defaultElements = [
                         'validation_rules'  => [
                             'required' => [
                                 'value'   => false,
-                                'message' => __('This field is required', 'fluentform'),
+                                'message' => $defaultGlobalMessages['required'],
                             ],
                         ],
                         'country_list' => [
@@ -511,23 +496,23 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                     'numeric' => [
                         'value'   => true,
-                        'message' => __('This field must contain numeric value', 'fluentform'),
+                        'message' => $defaultGlobalMessages['numeric'],
                     ],
                     'min' => [
                         'value'   => '',
-                        'message' => __('Minimum value is ', 'fluentform'),
+                        'message' => $defaultGlobalMessages['minimum'],
                     ],
                     'max' => [
                         'value'   => '',
-                        'message' => __('Maximum value is ', 'fluentform'),
+                        'message' => $defaultGlobalMessages['maximum'],
                     ],
                     'digits' => [
                         'value'   => '',
-                        'message' => __('The number of digits has to be ', 'fluentform'),
+                        'message' => $defaultGlobalMessages['digits'],
                     ],
                 ],
                 'conditional_logics'   => [],
@@ -578,7 +563,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -628,7 +613,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -684,7 +669,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -734,7 +719,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -765,11 +750,11 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                     'url' => [
                         'value'   => true,
-                        'message' => __('This field must contain a valid url', 'fluentform'),
+                        'message' => $defaultGlobalMessages['url'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -803,7 +788,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -837,20 +822,20 @@ $defaultElements = [
                 'validation_rules'     => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                     'max_file_size' => [
                         'value'      => 1048576,
                         '_valueFrom' => 'MB',
-                        'message'    => __('Maximum file size limit is 1MB', 'fluentform'),
+                        'message'    => $defaultGlobalMessages['max_file_size'],
                     ],
                     'max_file_count' => [
                         'value'   => 1,
-                        'message' => __('You can upload maximum 1 image', 'fluentform'),
+                        'message' => $defaultGlobalMessages['max_file_count'],
                     ],
                     'allowed_image_types' => [
                         'value'   => [],
-                        'message' => __('Allowed image types does not match', 'fluentform'),
+                        'message' => $defaultGlobalMessages['allowed_image_types'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -883,20 +868,20 @@ $defaultElements = [
                 'validation_rules'     => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                     'max_file_size' => [
                         'value'      => 1048576,
                         '_valueFrom' => 'MB',
-                        'message'    => __('Maximum file size limit is 1MB', 'fluentform'),
+                        'message'    => $defaultGlobalMessages['max_file_size'],
                     ],
                     'max_file_count' => [
                         'value'   => 1,
-                        'message' => __('You can upload maximum 1 file', 'fluentform'),
+                        'message' => $defaultGlobalMessages['max_file_count'],
                     ],
                     'allowed_file_types' => [
                         'value'   => [],
-                        'message' => __('Invalid file type', 'fluentform'),
+                        'message' => $defaultGlobalMessages['allowed_image_types'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -927,7 +912,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'country_list' => [
@@ -983,7 +968,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
             ],
@@ -1034,7 +1019,7 @@ $defaultElements = [
                 'validation_rules'   => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                         'per_row' => false,
                     ],
                 ],
@@ -1092,7 +1077,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -1145,7 +1130,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => false,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'conditional_logics' => [],
@@ -1174,7 +1159,7 @@ $defaultElements = [
                 'validation_rules'  => [
                     'required' => [
                         'value'   => true,
-                        'message' => __('This field is required', 'fluentform'),
+                        'message' => $defaultGlobalMessages['required'],
                     ],
                 ],
                 'required_field_message' => '',
