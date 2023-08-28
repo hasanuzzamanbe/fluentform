@@ -19,10 +19,10 @@
 			                ref="links" v-for="(link, i) in filteredLinks"
 			                :key="'link_' + i"
 			                tabindex='1'
-			                @keyup.enter="goToSlug($event, link)"
-			                @click="goToSlug($event, link)"
+			                @keyup.enter="goToSlug($event, link.item || link)"
+			                @click="goToSlug($event, link.item || link)"
 		                >
-			                <span>{{ link.title }}</span>
+			                <span>{{ link.item?.title || link.title }}</span>
 		                </li>
 	                </template>
 	                <li v-else>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import Fuse from 'fuse.js'
+
 export default {
 	name: 'global-search',
 	data() {
@@ -59,6 +61,7 @@ export default {
 			siteUrl: '',
 			linkFocusIndex: 0,
 			loading: true,
+			fuse: {}
 		}
 	},
 	methods: {
@@ -69,6 +72,7 @@ export default {
 					this.adminUrl = response.admin_url;
 					this.siteUrl = response.site_url;
 					this.links = response.links;
+					this.fuse = new Fuse(this.links, {minMatchCharLength: 2, threshold: 0.4, keys: ["title","tags"]});
 					this.filteredLinks = this.links.slice(0, 7);
 				})
 				.catch( (error)  => {
@@ -84,7 +88,7 @@ export default {
 				this.filteredLinks = this.links.slice(0, 7);
 				return;
 			}
-			this.filteredLinks = this.links.filter(link => link.tags.join(' ').toLowerCase().includes(value.toLowerCase()))
+			this.filteredLinks = this.fuse.search?.(value, {limit: 50}) || this.links.slice(0, 7);
 		},
 		reset() {
 			this.showSearch && (this.showSearch = false);
